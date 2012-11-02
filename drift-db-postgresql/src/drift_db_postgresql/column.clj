@@ -63,16 +63,10 @@ any string into a keyword, and replaces underscores with dashes." }
     []
     ["NOT NULL"]))
 
-(defn primary-key?
-  "Returns true if the given column-spec should be a primary key which means primary-key is true and auto-increment is
-   false."
-  [column-spec]
-  (and (column-protocol/primary-key? column-spec) (not (column-protocol/auto-increment? column-spec))))
-
 (defn
 #^{:doc "Returns the primary key spec vector from the given mods map."}
   primary-key-mod [column-spec]
-  (if (primary-key? column-spec)
+  (if (column-protocol/primary-key? column-spec)
     ["PRIMARY KEY"]
     []))
 
